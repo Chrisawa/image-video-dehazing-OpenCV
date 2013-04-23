@@ -13,7 +13,11 @@ still noticeable.
 frames are more or less dark. But if we reduce the value to around 0.75, the brightness is fine but the dehazing result
 seems not obvious enough.
 
-please contact me if you have any idea about improving the algorithm or just would like to discuss it.
+please contact me if you have any idea about improving the algorithm or would like to discuss it.
 
 Yuze Chen
 chenyuze1988@gmail.com
+
+Reference
+[1] K. Gibson, D. V˜o, T. Nguyen. An Investigation in Dehazing Compressed Images and Video.
+[2] K. He, J. Sun, X. Tang. Single Image Haze Removal Using Dark Channel Prior.
