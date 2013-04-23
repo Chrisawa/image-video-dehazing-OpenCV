@@ -2,17 +2,18 @@ image-video-dehazing
 image and video dehazing by median dark channel prior proposed by Gibson et al.
 ====================
 
-There is a problem that if we use the original estimated airlight value for dehazing, it makes most of dehazed images/frames
-too dark. Therefore I put an airlight compensation part which is able to handle with most of the hazy video frames.
+Since we estimate the atmospheric light (AL) value for every frame, sometimes it changes a lot and makes the brightness of
+the video change suddenly. So I added an AL smoothing part in the main function: AL(n) = alphaAL(n) + (1 - alpha)AL(n-1),
+where n stands for the frame number and alpha is set to be 0.05.
 
-However, the compensation part is made only by the observations on the test videos I found, please try some clips of your
-own. Moreover, since sometimes the airlight value of current frame changes too much from the one of the previous frame,
-the compensated airlight values need to be smoothed as well to remove the brightness changes.
+Some problems:
+1. Since the brightness of the dehazed frames is not only decided by the AL values, the variation of the brightness is
+still noticeable.
+2. w is the parameter which decides the degree of dehazing. If we use the default value of 0.95 in the paper, the dehazed
+frames are more or less dark. But if we reduce the value to around 0.75, the brightness is fine but the dehazing result
+seems not obvious enough.
 
-3 questions:
-1. Any better way of airlight compensation?
-2. I put the compensation part in the main function for the reason of processing different frames and it made the main function too large.
-3. There's still noticeable brightness changes if the scenes between frames change too much. Solutions?
-
+please contact me if you have any idea about improving the algorithm or just would like to discuss it.
 
 Yuze Chen
+chenyuze1988@gmail.com
