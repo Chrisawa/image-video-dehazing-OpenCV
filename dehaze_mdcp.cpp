@@ -19,9 +19,9 @@ using namespace std;
 //median filtered dark channel
 Mat getMedianDarkChannel(Mat src, int patch)
 {
-  Mat rgbmin = Mat::zeros(src.rows, src.cols, CV_8UC1);
-	Mat MDCP;
-    Vec3b intensity;
+        Mat rgbmin = Mat::zeros(src.rows, src.cols, CV_8UC1);
+        Mat MDCP;
+        Vec3b intensity;
 
 	for(int m=0; m<src.rows; m++)
 	{
@@ -104,7 +104,7 @@ int main(int argc, char** argv)
 		return -1;
 	double rate = vid.get(CV_CAP_PROP_FPS);
 	int delay = 1000/rate;
-  bool stop(false);
+        bool stop(false);
 
 	Mat frame;
 	Mat darkChannel;
@@ -114,8 +114,8 @@ int main(int argc, char** argv)
 	int Airlightp;          //airlight value of previous frame
 	int Airlight;           //airlight value of current frame
 	int FrameCount = 0;     //frame number
-  int ad;                 //temp airlight value
-  namedWindow("before and after", CV_WINDOW_AUTOSIZE);
+        int ad;                 //temp airlight value
+        namedWindow("before and after", CV_WINDOW_AUTOSIZE);
 	
 	for(;;)
 	{
