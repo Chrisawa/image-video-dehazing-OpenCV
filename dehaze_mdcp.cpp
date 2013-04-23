@@ -125,18 +125,18 @@ int main(int argc, char** argv)
 			break;
 
 		//create mat for showing the frame before and after processing
-	  Mat beforeafter = Mat::zeros(frame.rows, 2 * frame.cols, CV_8UC3);
-	  Rect roil (0, 0, frame.cols, frame.rows);
-	  Rect roir (frame.cols, 0, frame.cols, frame.rows);
+	        Mat beforeafter = Mat::zeros(frame.rows, 2 * frame.cols, CV_8UC3);
+	        Rect roil (0, 0, frame.cols, frame.rows);
+	        Rect roir (frame.cols, 0, frame.cols, frame.rows);
 
 		//first frame, without airlight smoothing
 		if (FrameCount == 1)
 		{
 			darkChannel = getMedianDarkChannel(frame, 5);
-		  Airlight = estimateA(darkChannel);
-		  T = estimateTransmission(darkChannel, Airlight);
+		        Airlight = estimateA(darkChannel);
+		        T = estimateTransmission(darkChannel, Airlight);
 			ad = Airlight;
-      fogfree = getDehazed(frame, T, Airlight);
+                        fogfree = getDehazed(frame, T, Airlight);
 		}
 
 		//other frames, with airlight smoothing
@@ -146,18 +146,18 @@ int main(int argc, char** argv)
 
 			Airlightp = ad;
 			darkChannel = getMedianDarkChannel(frame, 5);
-		  Airlight = estimateA(darkChannel);
-		  T = estimateTransmission(darkChannel, Airlight);
-      cout<<"previous:"<<Airlightp<<"--current:"<<Airlight<<endl;
-		  ad = int(alpha * double(Airlight) + (1 - alpha) * double(Airlightp));//airlight smoothing
-		  cout<<"smoothed airlight is:"<<ad<<endl;
-		  fogfree = getDehazed(frame, T, ad);
+		        Airlight = estimateA(darkChannel);
+		        T = estimateTransmission(darkChannel, Airlight);
+                        cout<<"previous:"<<Airlightp<<"--current:"<<Airlight<<endl;
+		        ad = int(alpha * double(Airlight) + (1 - alpha) * double(Airlightp));//airlight smoothing
+		        cout<<"smoothed airlight is:"<<ad<<endl;
+		        fogfree = getDehazed(frame, T, ad);
 
 			t = (double)cvGetTickCount() - t;
 			printf( "=============Execution time per frame = %gms\n", t/((double)cvGetTickFrequency()*1000.) );
 		}
-	  frame.copyTo(beforeafter(roil));
-	  fogfree.copyTo(beforeafter(roir));
+	        frame.copyTo(beforeafter(roil));
+	        fogfree.copyTo(beforeafter(roir));
 		imshow("before and after", beforeafter);
 
 		if(waitKey(delay) >= 0)
